@@ -79,8 +79,6 @@ Where:
 * **TXID:** The Transaction ID obtained using the `zoinode outputs` command above.
 * **INDEX:** The Index obtained using the `zoinode outputs` command above.
 
-
-
 Your file should look like this, except the first line which is there for visual reference.  The file will only have one line.
 
 ![](/assets/zoinode-conf.png)
@@ -160,6 +158,8 @@ Next, enter the following configuration.  Be sure to update the following fields
 rpcuser=<username>
 rpcpassword=<password>
 rpcallowip=127.0.0.1
+port=8255
+rpcport=8822
 listen=0
 server=1
 daemon=1
