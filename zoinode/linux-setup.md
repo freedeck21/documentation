@@ -34,15 +34,42 @@ In the console, enter the following command.  This generates the Zoinode key.  B
 zoinode genkey
 ```
 
+  
 Next, enter the following command to generate a Zoinode deposit address for the 25,000 Zoin collateral.  ZN1 will be the label assigned to the new deposit address and can be changed if desired.
 
 ```
 getaccountaddress ZN1
 ```
 
+  
 After generating the Zoinode key and Zoinode wallet address, transfer the collateral deposit of 25,000 Zoin.  Be aware that you must send **exactly 25,000 Zoin in a single transaction**.  Also consider that a transaction fee will be deducted.
 
 Once you have sent the 25,000 Zoin to the address generated from `getaccountaddress`, you will need to obtain the transaction ID and index.  Do this by navigating to **Help --&gt; Debug Window --&gt; Console** as shown in the screenshot above.
+
+Type the following into the Console to obtain your **Transaction ID** and **Index**:
+
+```
+zoinode outputs
+```
+
+  
+You should see the something similar to the example below:
+
+```
+{ "d8ff88888bb6d9998d22c5155437f009c72dfd55dd2222f87fd55e22c0f89ddc" : "1", }
+```
+
+  
+From the example, we get the **Transaction ID** and **Index**:
+
+* **Transaction ID: **d8ff88888bb6d9998d22c5155437f009c72dfd55dd2222f87fd55e22c0f89ddc
+* **Index: **1
+
+
+
+Next, you will need to create a text file 
+
+
 
 ## Server Configuration
 
