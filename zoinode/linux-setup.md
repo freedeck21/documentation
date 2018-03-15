@@ -17,7 +17,7 @@ If you not feel confident in setting up, running and mantain your Zoinodes, you 
    2. At least 20 GB of storage space  
    3. A static public IP address
 
-4. **Secure the Wallet:** This is optional but highly recommended.  See Wallet / Securing the Zoin Wallet for details.
+4. **Secure the Wallet:** This is optional but **highly recommended**.  See [Wallet / Securing the Zoin Wallet](/wallet/securing-the-wallet.md) for details.
 
 5. **Review the Release Notes: **See the Release Notes in the [Documentation](/introduction/release-notes.md) or on [Github](https://github.com/zoinofficial/zoin/releases) that corresponds with the version of the wallet you are using.
 
@@ -34,14 +34,12 @@ In the console, enter the following command.  This generates the Zoinode key.  B
 zoinode genkey
 ```
 
-  
 Next, enter the following command to generate a Zoinode deposit address for the 25,000 Zoin collateral.  ZN1 will be the label assigned to the new deposit address and can be changed if desired.
 
 ```
 getaccountaddress ZN1
 ```
 
-  
 After generating the Zoinode key and Zoinode wallet address, transfer the collateral deposit of 25,000 Zoin.  Be aware that you must send **exactly 25,000 Zoin in a single transaction**.  Also consider that a transaction fee will be deducted.
 
 Once you have sent the 25,000 Zoin to the address generated from `getaccountaddress`, you will need to obtain the transaction ID and index.  Do this by navigating to **Help --&gt; Debug Window --&gt; Console** as shown in the screenshot above.
@@ -52,24 +50,42 @@ Type the following into the Console to obtain your **Transaction ID** and **Inde
 zoinode outputs
 ```
 
-  
 You should see the something similar to the example below:
 
 ```
 { "d8ff88888bb6d9998d22c5155437f009c72dfd55dd2222f87fd55e22c0f89ddc" : "1", }
 ```
 
-  
 From the example, we get the **Transaction ID** and **Index**:
 
 * **Transaction ID: **d8ff88888bb6d9998d22c5155437f009c72dfd55dd2222f87fd55e22c0f89ddc
 * **Index: **1
 
+Next, you will need to create a text file on the computer with the desktop wallet.  Depending on your operating system, create a file called `zoinode.conf`and place it in the appropriate directory:
+
+* **Windows:**`%APPDATA%`
+* **OS X:** `~/Library/Application Support/zoin`
+* **Linux:** `$HOME/.zoin`
+
+In the file, add a line that matches the following syntax.  If you are running multiple Zoinodes, you will add one line for each node with the appropriate values:
+
+`LABEL IP:82255 ZOINODEPRIVATEKEY TXID INDEX`
+
+Where:
+
+* **LABEL:** The label of the node used for `getaccountaddress` command above.
+* **IP:** Your VPS public IP address.
+* **ZOINODEPRIVATEKEY:** Zoinode key previously generated with the `zoinode genkey`command.
+* **TXID:** The Transaction ID obtained using the `zoinode outputs` command above.
+* **INDEX:** The Index obtained using the `zoinode outputs` command above.
 
 
-Next, you will need to create a text file 
 
+Your file should look like this, except the first line which is there for visual reference.  The file will only have one line.
 
+![](/assets/zoinode-conf.png)
+
+Save the file and restart your wallet.  The wallet is now configured for Zoinode and next we will setup and link the Zoinode server.
 
 ## Server Configuration
 
@@ -102,6 +118,8 @@ ufw allow 8255/tcp
 ufw logging on
 ufw enable
 ```
+
+It is also recommended that you further harden your server with [AppArmor](https://wiki.ubuntu.com/AppArmor) or [SELinux](https://wiki.debian.org/SELinux), [Fail2Ban](https://www.fail2ban.org/wiki/index.php/Main_Page), and other common best practices as suggested [here](https://www.cisecurity.org/cis-benchmarks/).
 
 ## Download, Build & Configure the Zoin Wallet
 
